@@ -8,6 +8,7 @@ public class TacoStand
 	private static double totalFunds = 0;
 
 	/**
+	 *
 	 * Sets the store to zero for use in automated testing.
 	 */
 	public static void initialize()
@@ -71,17 +72,24 @@ public class TacoStand
 	 */
 	public static boolean orderSupplies(double budget)
 	{
-		//tacos cost 75 cents each in supplies, keeping it simple
-	    int tacosEach = (int)(Math.round(budget / 0.75 / 4));
+		boolean orderedSupplies = false;
 
-	    TacoStand.totalFunds -= budget;
+		if(budget <= TacoStand.totalFunds)
+		{
+			//tacos cost 75 cents each in supplies, keeping it simple
+	    	int tacosEach = (int)(Math.round(budget / 0.75 / 4));
 
-	    TacoStand.numAsada += tacosEach;
-	    TacoStand.numPollo += tacosEach;
-	    TacoStand.numLengua += tacosEach;
-	    TacoStand.numUltimate += tacosEach;
+	    	TacoStand.totalFunds -= budget;
 
-		return true;  //TODO: this is stubbed, replace this line with your actual code!
+	    	TacoStand.numAsada += tacosEach;
+	    	TacoStand.numPollo += tacosEach;
+	    	TacoStand.numLengua += tacosEach;
+	    	TacoStand.numUltimate += tacosEach;
+
+			orderedSupplies = true;
+		}
+
+		return orderedSupplies;
 	}
 
 	/**
@@ -93,7 +101,26 @@ public class TacoStand
 	 */
 	public static void updateTotalFunds(int tacoOption, int numTacos)
 	{
-		//TODO: this is stubbed, replace this line with your actual code!
+		if(tacoOption == 1)
+		{
+			TacoStand.totalFunds += 2.50 * numTacos;
+			TacoStand.numAsada -= numTacos;
+		}
+		else if(tacoOption == 2)
+		{
+			TacoStand.totalFunds += 1.75 * numTacos;
+			TacoStand.numPollo -= numTacos;
+		}
+		else if(tacoOption == 3)
+		{
+			TacoStand.totalFunds += 3.00 * numTacos;
+			TacoStand.numLengua -= numTacos;
+		}
+		else if(tacoOption == 4)
+		{
+			TacoStand.totalFunds += 18.00 * numTacos;
+			TacoStand.numUltimate -= numTacos;
+		}
 	}
 	
 	
@@ -107,6 +134,25 @@ public class TacoStand
 	 */
 	public static boolean areTacosAvailable(int tacoOption, int numTacos)
 	{
-		return false; //TODO: this is stubbed, replace this line with your actual code!
+		boolean tacosAvailable = false;
+
+		if(tacoOption == 1)
+		{
+			tacosAvailable = TacoStand.numAsada >= numTacos;
+		}
+		else if(tacoOption == 2)
+		{
+			tacosAvailable = TacoStand.numPollo >= numTacos;
+		}
+		else if(tacoOption == 3)
+		{
+			tacosAvailable = TacoStand.numLengua >= numTacos;
+		}
+		else if(tacoOption == 4)
+		{
+			tacosAvailable = TacoStand.numUltimate >= numTacos;
+		}
+
+		return tacosAvailable;
 	}
 }
